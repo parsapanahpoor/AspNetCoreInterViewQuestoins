@@ -2,7 +2,13 @@
 
 بانک سوالات مصاحبه **ASP.NET Core Backend Developer** — صفحهٔ تعاملی با پاسخ‌های مصاحبه‌محور.
 
-## اجرا
+## نسخه آنلاین (GitHub Pages)
+
+برای دانشجویان:
+
+**https://parsapanahpoor.github.io/AspNetCoreInterViewQuestoins/**
+
+## اجرا به‌صورت محلی
 
 فایل `index.html` را در مرورگر باز کنید (در کنار `questions-data.js` باشد).
 
