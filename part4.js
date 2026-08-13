@@ -1,0 +1,141 @@
+window.__PART4 = [
+  {
+    title: "تست و کیفیت",
+    desc: "اصول طراحی تست، تست‌پذیری و تضمین کیفیت در ASP.NET Core",
+    questions: [
+      { q: "تفاوت Unit Test و Integration Test چیست؟", a: "**Unit Test** یک واحد کوچک را سریع و جدا از زیرساخت بررسی می‌کند. **Integration Test** همکاری چند جزء واقعی مانند API، دیتابیس و middleware را می‌سنجد. TIP: تعداد زیادی تست واحد و تعداد کمتری تست یکپارچه هدفمند نگه دارید." },
+      { q: "Mock و Stub چه تفاوتی دارند؟", a: "**Stub** پاسخ از پیش تعیین‌شده می‌دهد تا مسیر تست کنترل شود. **Mock** علاوه بر پاسخ، تعامل‌هایی مثل تعداد و ترتیب فراخوانی را نیز تأیید می‌کند. TIP: فقط رفتارهای مهم را verify کنید تا تست شکننده نشود." },
+      { q: "Fake در تست چیست؟", a: "**Fake** پیاده‌سازی ساده اما اجرایی یک وابستگی است، مثل repository درون‌حافظه‌ای. برخلاف mock معمولاً منطق و state واقعی محدودی دارد. TIP: رفتار Fake باید با قرارداد نسخه production سازگار بماند." },
+      { q: "Test Coverage چه چیزی را نشان می‌دهد؟", a: "Coverage درصد خطوط یا شاخه‌های اجراشده توسط تست‌ها را نشان می‌دهد، نه کیفیت assertionها را. پوشش بالا می‌تواند همچنان با تست‌های بی‌ارزش همراه باشد. TIP: روی مسیرهای پرریسک و **branch coverage** تمرکز کنید." },
+      { q: "چگونه سرویس خارجی را تست می‌کنید؟", a: "در تست واحد، مرز سرویس را پشت interface قرار داده و stub یا mock می‌کنیم. در تست یکپارچه، fake server مانند `WireMock.Net` پاسخ HTTP کنترل‌شده می‌دهد. TIP: timeout، retry و پاسخ‌های خطا را هم آزمایش کنید." },
+      { q: "Contract Testing چیست؟", a: "Contract Test سازگاری درخواست و پاسخ بین provider و consumer را بررسی می‌کند. این روش تغییرات breaking را پیش از deployment آشکار می‌سازد. TIP: قراردادها را در CI هر دو سرویس اجرا و نسخه‌بندی کنید." },
+      { q: "Integration Test در ASP.NET Core چگونه نوشته می‌شود؟", a: "معمولاً برنامه با `WebApplicationFactory<Program>` در یک host آزمایشی بالا می‌آید. سپس با `HttpClient` مسیر کامل routing، middleware و serialization تست می‌شود. TIP: زیرساخت حساس را تا حد ممکن واقعی نگه دارید." },
+      { q: "WebApplicationFactory چه کاربردی دارد؟", a: "`WebApplicationFactory` سرور تست درون‌پردازه‌ای برای برنامه ASP.NET Core می‌سازد. با آن می‌توان DI، configuration و authentication را برای سناریوی تست جایگزین کرد. TIP: custom factory مشترک، setup تکراری را کم می‌کند." },
+      { q: "Test Isolation یعنی چه؟", a: "هر تست باید مستقل از ترتیب اجرا و نتیجه تست‌های دیگر باشد. state مشترک، رکورد دیتابیس و clock سراسری باید کنترل یا بازنشانی شوند. TIP: تست‌ها را تصادفی و موازی اجرا کنید تا وابستگی پنهان پیدا شود." },
+      { q: "Flaky Test چیست و چگونه رفع می‌شود؟", a: "تست flaky بدون تغییر کد گاهی موفق و گاهی ناموفق می‌شود. زمان واقعی، race condition، شبکه و داده مشترک علت‌های متداول‌اند. TIP: به‌جای retry کور، علت را ثبت و تست را قرنطینه و اصلاح کنید." },
+      { q: "با تست‌های کند چه می‌کنید؟", a: "ابتدا زمان هر تست را اندازه‌گیری و بخش کند را مشخص می‌کنیم. setup مشترک امن، parallelization و کاهش I/O غیرضروری کمک می‌کند. TIP: مجموعه‌های unit، integration و E2E را در pipelineهای مناسب جدا کنید." },
+      { q: "ویژگی‌های یک تست خوب چیست؟", a: "تست خوب **سریع، مستقل، تکرارپذیر و خوانا** است. نام تست باید رفتار و نتیجه مورد انتظار را توضیح دهد. TIP: هر تست فقط یک دلیل روشن برای شکست داشته باشد." },
+      { q: "Arrange-Act-Assert چیست؟", a: "الگوی **AAA** ساختار استاندارد تست واحد است: در `Arrange` داده و وابستگی‌ها آماده می‌شوند، در `Act` فقط یک رفتار هدف اجرا می‌شود و در `Assert` نتیجه و اثر جانبی بررسی می‌گردد. این جداسازی باعث می‌شود تست کوتاه، خوانا و قابل‌نگهداری بماند. TIP: اگر بخش Act بیش از یک عمل معنی‌دار دارد، معمولاً تست بیش از حد بزرگ شده است." },
+      { q: "Snapshot Testing چه زمانی مناسب است؟", a: "Snapshot خروجی بزرگ و پایدار مانند JSON یا HTML را با نسخه تأییدشده مقایسه می‌کند. تغییر عمدی باید با بازبینی انسانی snapshot جدید همراه باشد. TIP: داده‌های ناپایدار مثل timestamp را پیش از مقایسه حذف کنید." },
+      { q: "Brittle Test چیست؟", a: "تست شکننده با refactor بی‌اثر بر رفتار عمومی می‌شکند. assertion روی جزئیات داخلی و mockهای بیش‌ازحد علت رایج است. TIP: خروجی و قرارداد قابل مشاهده را تست کنید، نه نحوه پیاده‌سازی را." },
+      { q: "E2E Test چه مزایا و هزینه‌ای دارد؟", a: "E2E جریان واقعی کاربر را از ورودی تا زیرساخت نهایی بررسی می‌کند. اعتماد بالایی می‌دهد اما کند، گران و عیب‌یابی آن دشوار است. TIP: فقط مسیرهای حیاتی کسب‌وکار را E2E کنید." },
+      { q: "داده تست را چگونه مدیریت می‌کنید؟", a: "برای هر تست داده کمینه و صریح با builder یا fixture می‌سازیم. داده باید مستقل، قابل پاک‌سازی و بدون وابستگی به محیط باشد. TIP: شناسه‌های یکتا مانع تداخل اجرای موازی می‌شوند." },
+      { q: "تست هم‌زمانی چگونه انجام می‌شود؟", a: "چند عملیات را هماهنگ و هم‌زمان روی state مشترک اجرا می‌کنیم. نتیجه باید invariant، قفل‌گذاری یا optimistic concurrency را تأیید کند. TIP: race را با barrier کنترل کنید، نه با `Task.Delay` تصادفی." },
+      { q: "کیفیت تست‌ها در CI چگونه کنترل می‌شود؟", a: "CI باید build، تست‌ها و گزارش coverage را در محیط تمیز اجرا کند. شکست تست، lint یا تحلیل ایستا باید merge را متوقف سازد. TIP: نتیجه و artifactها را برای عیب‌یابی نگه دارید." },
+      { q: "Quality Gate و Testcontainers چه نقشی دارند؟", a: "**Quality Gate** حداقل‌های قابل‌اندازه‌گیری مانند تست موفق و نبود آسیب‌پذیری بحرانی را الزام می‌کند. `Testcontainers` دیتابیس یا broker واقعی و موقت را برای تست بالا می‌آورد. TIP: gate را واقع‌بینانه تنظیم کنید تا تیم آن را دور نزند." },
+      { q: "Mutation Testing چیست؟", a: "Mutation Testing تغییرات کوچک عمدی در کد ایجاد می‌کند و انتظار دارد تست‌ها شکست بخورند. mutant زنده نشان می‌دهد assertionها رفتار را کافی کنترل نکرده‌اند. TIP: آن را دوره‌ای روی منطق حیاتی اجرا کنید چون پرهزینه است." },
+      { q: "چگونه زمان و تاریخ را تست‌پذیر می‌کنید؟", a: "دسترسی مستقیم به `DateTime.UtcNow` کنترل تست را کم می‌کند. در .NET جدید می‌توان `TimeProvider` را تزریق و در تست زمان را ثابت کرد. TIP: timezone و مرز تغییر روز را هم پوشش دهید." },
+      { q: "آیا باید متد private را مستقیم تست کرد؟", a: "معمولاً متد private از طریق رفتار public پوشش داده می‌شود. نیاز شدید به تست مستقیم می‌تواند علامت مسئولیت زیاد کلاس باشد. TIP: منطق مستقل را به یک سرویس کوچک با API عمومی استخراج کنید." },
+      { q: "تست پارامتری چه مزیتی دارد؟", a: "تست پارامتری یک رفتار را با ورودی‌های متعدد بدون تکرار کد می‌سنجد. در xUnit از `[Theory]` و `[InlineData]` استفاده می‌شود. TIP: نام و داده‌ها را طوری انتخاب کنید که شکست قابل تشخیص باشد." },
+      { q: "تفاوت State Verification و Behavior Verification چیست؟", a: "State Verification نتیجه نهایی یا تغییر وضعیت را بررسی می‌کند. Behavior Verification تعامل با وابستگی را با mock می‌سنجد. TIP: حالت نهایی را ترجیح دهید و رفتار را فقط برای side effect مهم verify کنید." }
+    ]
+  },
+  {
+    title: "Monitoring، Logging و Performance",
+    desc: "مشاهده‌پذیری، عیب‌یابی و بهینه‌سازی سامانه‌های ASP.NET Core",
+    questions: [
+      { q: "سطوح Logging چه هستند و چگونه انتخاب می‌شوند؟", a: "`Trace` و `Debug` برای جزئیات توسعه، `Information` برای رخداد عادی و `Warning` برای وضعیت غیرعادی‌اند. `Error` شکست قابل مدیریت و `Critical` خرابی جدی سرویس را نشان می‌دهد. TIP: سطح را بر اساس اقدام موردنیاز اپراتور انتخاب کنید." },
+      { q: "Structured Logging چیست؟", a: "در Structured Logging داده‌ها به‌صورت فیلدهای قابل جست‌وجو ثبت می‌شوند. مثلاً `LogInformation(\"Order {OrderId}\", id)` بهتر از الحاق رشته است. TIP: نام propertyها را ثابت و معنایی نگه دارید." },
+      { q: "Correlation ID چیست؟", a: "Correlation ID شناسه مشترک تمام logهای یک درخواست یا جریان توزیع‌شده است. middleware آن را دریافت یا تولید کرده و به فراخوانی‌های بعدی منتقل می‌کند. TIP: از `traceparent` استاندارد W3C برای tracing توزیع‌شده استفاده کنید." },
+      { q: "APM چه کمکی می‌کند؟", a: "APM latency، خطا، throughput و dependency callها را در سطح برنامه جمع می‌کند. با آن می‌توان مسیر کند را میان چند سرویس دنبال کرد. TIP: sampling و حذف داده حساس را از ابتدا تنظیم کنید." },
+      { q: "Health Check در ASP.NET Core چیست؟", a: "Health Check وضعیت آماده‌بودن برنامه و وابستگی‌های حیاتی را اعلام می‌کند. endpoint با `AddHealthChecks` و `MapHealthChecks` ارائه می‌شود. TIP: liveness را سبک و readiness را وابسته به سرویس‌های ضروری نگه دارید." },
+      { q: "Metrics و Tracing چه تفاوتی دارند؟", a: "Metrics اعداد تجمیعی کم‌هزینه مانند نرخ درخواست و latency را نشان می‌دهد. Tracing مسیر یک درخواست خاص را میان عملیات و سرویس‌ها دنبال می‌کند. TIP: metric برای کشف و trace برای توضیح مشکل مناسب است." },
+      { q: "چگونه bottleneck را پیدا می‌کنید؟", a: "ابتدا با metric و trace مشخص می‌کنیم زمان در CPU، دیتابیس، شبکه یا lock مصرف شده است. سپس profiler و query plan فرضیه را با داده تأیید می‌کنند. TIP: پیش از بهینه‌سازی baseline قابل تکرار بسازید." },
+      { q: "چه زمانی از Cache استفاده می‌کنید؟", a: "Cache برای داده پرتکرار، نسبتاً پایدار و پرهزینه مناسب است. هزینه miss، stale data و invalidation باید از سود latency کمتر باشد. TIP: ابتدا TTL و سقف حافظه را مشخص کنید." },
+      { q: "Memory Cache و Redis چه تفاوتی دارند؟", a: "`IMemoryCache` سریع و محلی است اما میان instanceها مشترک نیست. Redis cache توزیع‌شده و مناسب scale-out است ولی هزینه شبکه و عملیات دارد. TIP: برای session یا داده مشترک چند instance از cache توزیع‌شده استفاده کنید." },
+      { q: "Cache Invalidation چگونه انجام می‌شود؟", a: "راه‌های رایج TTL، حذف هنگام write و versioned key هستند. انتخاب به میزان تحمل داده stale و مالکیت داده بستگی دارد. TIP: **cache-aside** ساده است اما race و stampede را مدیریت کنید." },
+      { q: "چگونه Memory Leak را تشخیص می‌دهید؟", a: "رشد پایدار heap پس از GC و افزایش working set نشانه بررسی است. dump حافظه و ابزارهایی مثل `dotnet-gcdump` مسیر reference را نشان می‌دهند. TIP: event handler، cache بدون سقف و singletonهای نگهدارنده object را بررسی کنید." },
+      { q: "CPU-bound و I/O-bound چه تفاوتی دارند؟", a: "کار CPU-bound زمان پردازنده مصرف می‌کند و شاید از parallelism محدود سود ببرد. کار I/O-bound منتظر شبکه یا دیسک است و باید با `async/await` thread را آزاد کند. TIP: `Task.Run` درمان عملیات I/O نیست." },
+      { q: "زمان پاسخ درخواست را چگونه اندازه می‌گیرید؟", a: "middleware می‌تواند با `Stopwatch` latency کل درخواست را ثبت کند. tracing زمان هر span مانند دیتابیس و HTTP را جدا نشان می‌دهد. TIP: به percentileهای `p95` و `p99` نگاه کنید، نه فقط میانگین." },
+      { q: "Over-fetching و Under-fetching چیست؟", a: "Over-fetching داده بیش از نیاز و under-fetching داده ناکافی با round trip اضافه ایجاد می‌کند. DTO هدفمند و projection این مشکل را در REST کاهش می‌دهد. TIP: payload و تعداد درخواست را با رفتار واقعی client اندازه بگیرید." },
+      { q: "Pagination را چگونه طراحی می‌کنید؟", a: "Offset pagination ساده است اما در صفحات عمیق کند و در داده متغیر ناپایدار می‌شود. Keyset pagination با cursor روی ترتیب یکتا عملکرد پایدارتری دارد. TIP: اندازه صفحه را محدود و ترتیب را قطعی کنید." },
+      { q: "مشکل N+1 چیست؟", a: "N+1 یعنی یک query اولیه و سپس یک query برای هر ردیف اجرا شود. projection، join یا eager loading هدفمند تعداد round tripها را کم می‌کند. TIP: SQL تولیدشده EF Core را در محیط تست مشاهده کنید." },
+      { q: "چگونه query دیتابیس را بهینه می‌کنید؟", a: "ابتدا query کند و execution plan آن را ثبت می‌کنیم. index مناسب، projection محدود و حذف scan غیرضروری معمولاً مؤثر است. TIP: هر index هزینه write و فضا دارد، پس با workload واقعی بسنجید." },
+      { q: "Response Compression چه زمانی مفید است؟", a: "فشرده‌سازی برای payload متنی بزرگ پهنای باند را کم می‌کند. برای فایل از قبل فشرده یا پاسخ کوچک ممکن است هزینه CPU بیشتر از سود باشد. TIP: HTTPS، MIME type و پشتیبانی client را درست تنظیم کنید." },
+      { q: "Rate Limiting چه نقشی در کارایی دارد؟", a: "Rate Limiting مصرف یک client را محدود و از اشباع منابع جلوگیری می‌کند. ASP.NET Core الگوریتم‌هایی مانند token bucket و concurrency limiter دارد. TIP: پاسخ `429` و سیاست retry روشن به client بدهید." },
+      { q: "چگونه Log پرحجم را کنترل می‌کنید؟", a: "سطح مناسب، sampling و aggregation حجم log را کاهش می‌دهد. رخدادهای تکراری نباید در loop با سطح بالا ثبت شوند. TIP: بودجه نگهداری و retention را بر اساس ارزش عملیاتی تعیین کنید." },
+      { q: "OpenTelemetry چیست؟", a: "OpenTelemetry استاندارد و SDK مشترک برای metrics، logs و traces است. instrumentation برنامه را از vendor مقصد جدا می‌کند. TIP: resource attributeهایی مثل service name و environment را یکسان تعریف کنید." },
+      { q: "SLA، SLO و SLI چه تفاوتی دارند؟", a: "SLI اندازه‌گیری واقعی مانند درصد درخواست موفق است. SLO هدف داخلی همان شاخص و SLA تعهد قراردادی همراه پیامد است. TIP: alert را بر اساس مصرف error budget تنظیم کنید." },
+      { q: "چگونه Cache Stampede را مهار می‌کنید؟", a: "در stampede چند درخواست هم‌زمان پس از انقضا داده را دوباره محاسبه می‌کنند. lock تک‌پرواز، TTL تصادفی و refresh زودهنگام بار را پخش می‌کند. TIP: هنگام شکست منبع، stale data کنترل‌شده می‌تواند بهتر از outage باشد." },
+      { q: "برای Performance Test چه معیارهایی مهم‌اند؟", a: "throughput، latency percentile، error rate و مصرف منابع معیارهای اصلی‌اند. سناریو باید warm-up، بار پایدار و اوج واقع‌بینانه داشته باشد. TIP: نتیجه را با baseline و SLO مقایسه کنید." },
+      { q: "اگر بخواهید یک سیستم بانکی پرتراکنش را طراحی کنید، مهم‌ترین ملاحظات شما چیست؟", a: "اولویت با **صحت مالی** است: دفترکل دوطرفه (double-entry ledger)، تراکنش اتمیک، کنترل هم‌زمانی روی حساب، و `idempotency key` برای جلوگیری از دوباره‌کار شدن انتقال. سپس جداسازی نوشتن‌های حیاتی از خواندن‌های گزارش، الگوی Outbox برای انتشار رویداد، و Audit Log تغییرناپذیر ضروری است. از نظر عملیاتی باید Latency، Throughput، نرخ خطای مالی، Reconciliation دوره‌ای، و Disaster Recovery اندازه‌گیری و تمرین شوند. TIP: در مصاحبه بگویید Consistency مالی مهم‌تر از Microservices زودرس است؛ Modular Monolith یا سرویس‌های محدود با مرزهای واضح اغلب نقطه شروع بهتر است." }
+    ]
+  },
+  {
+    title: "Messaging و Event Brokers",
+    desc: "صف، رویداد، تحویل قابل‌اعتماد و پردازش پیام در سامانه‌های توزیع‌شده",
+    questions: [
+      { q: "RabbitMQ و Kafka چه تفاوتی دارند؟", a: "RabbitMQ broker صف‌محور با routing انعطاف‌پذیر و ack پیام است. Kafka یک log توزیع‌شده با retention و replay پرقدرت برای جریان داده است. TIP: انتخاب را بر اساس الگوی مصرف و نیاز replay انجام دهید، نه محبوبیت." },
+      { q: "Queue و Topic چه تفاوتی دارند؟", a: "در queue معمولاً هر پیام توسط یکی از workerهای رقیب پردازش می‌شود. در topic هر subscription می‌تواند نسخه مستقل پیام را دریافت کند. TIP: برای fan-out رویداد از topic و برای توزیع کار از queue استفاده کنید." },
+      { q: "At-most-once و At-least-once چیست؟", a: "At-most-once پیام را حداکثر یک‌بار می‌رساند اما احتمال گم‌شدن دارد. At-least-once از گم‌شدن جلوگیری می‌کند ولی duplicate ممکن است. TIP: اغلب at-least-once همراه consumer idempotent انتخاب عملی است." },
+      { q: "Exactly-once واقعاً ممکن است؟", a: "Exactly-once سرتاسری میان چند سیستم بسیار دشوار و معمولاً پرهزینه است. برخی brokerها آن را در محدوده مشخص و با transaction فراهم می‌کنند. TIP: اثر دقیقاً یک‌بار را با idempotency و deduplication طراحی کنید." },
+      { q: "MassTransit و NServiceBus چه هستند؟", a: "هر دو abstraction سطح بالا برای messaging در .NET ارائه می‌کنند. retry، saga، routing و integration با brokerها را ساده‌تر می‌سازند. TIP: مدل هزینه، پشتیبانی و نیازهای عملیاتی را پیش از انتخاب مقایسه کنید." },
+      { q: "Outbox Pattern چیست؟", a: "Outbox تغییر business و رکورد پیام را در یک transaction دیتابیس ذخیره می‌کند. worker بعداً پیام ثبت‌شده را با اطمینان به broker می‌فرستد. TIP: انتشار تکراری ممکن است، پس consumer همچنان idempotent باشد." },
+      { q: "Inbox Pattern چیست؟", a: "Inbox شناسه پیام‌های دریافت‌شده را پیش از اعمال اثر ذخیره می‌کند. پیام تکراری با مشاهده شناسه قبلی نادیده گرفته می‌شود. TIP: retention رکوردهای inbox را متناسب با پنجره تکرار تعیین کنید." },
+      { q: "Idempotent Consumer چگونه ساخته می‌شود؟", a: "پردازش چندباره یک پیام باید همان نتیجه یک‌بار را ایجاد کند. شناسه یکتا، unique constraint یا عملیات upsert راه‌های متداول‌اند. TIP: ثبت deduplication و تغییر business را اتمیک کنید." },
+      { q: "Poison Message چیست؟", a: "Poison message پیامی است که با retry معمول همچنان شکست می‌خورد. تکرار بی‌پایان آن queue را مسدود و منابع را مصرف می‌کند. TIP: پس از تعداد محدود تلاش آن را به DLQ منتقل کنید." },
+      { q: "Dead Letter Queue چه کاربردی دارد؟", a: "DLQ پیام‌های منقضی، ردشده یا شکست‌خورده را جدا نگه می‌دارد. تیم می‌تواند علت را بررسی و پس از اصلاح replay کند. TIP: برای عمق DLQ و سن پیام alert بسازید." },
+      { q: "Retry در مصرف پیام چگونه طراحی می‌شود؟", a: "خطای گذرا با exponential backoff و jitter قابل retry است. خطای validation یا business معمولاً با تکرار حل نمی‌شود. TIP: retry فوری را محدود و retry تأخیری را از worker اصلی جدا کنید." },
+      { q: "Ordering پیام‌ها چگونه تضمین می‌شود؟", a: "ترتیب سراسری معمولاً throughput و مقیاس‌پذیری را کاهش می‌دهد. partition بر اساس aggregate ID ترتیب محلی مرتبط را حفظ می‌کند. TIP: consumer باید پیام قدیمی یا خارج از ترتیب را تشخیص دهد." },
+      { q: "Message Broker را چگونه مانیتور می‌کنید؟", a: "عمق queue، consumer lag، نرخ publish و consume و تعداد retry مهم‌اند. سن قدیمی‌ترین پیام اغلب از طول queue معنادارتر است. TIP: alert را با ظرفیت و SLO پردازش هماهنگ کنید." },
+      { q: "Event و Command چه تفاوتی دارند؟", a: "Command درخواست انجام کار و معمولاً خطاب به یک handler است. Event بیان واقعیتی رخ‌داده و ممکن است چند subscriber داشته باشد. TIP: نام event را گذشته و تغییرناپذیر، مانند `OrderPlaced`، انتخاب کنید." },
+      { q: "Schema Evolution پیام چگونه مدیریت می‌شود؟", a: "consumer و producer ممکن است هم‌زمان deploy نشوند، پس سازگاری لازم است. افزودن فیلد optional امن‌تر از حذف یا تغییر معنای فیلد است. TIP: schema را نسخه‌بندی و compatibility را در CI بررسی کنید." },
+      { q: "Saga چیست؟", a: "Saga یک فرایند business چندمرحله‌ای میان سرویس‌ها را هماهنگ می‌کند. شکست با compensating action جبران می‌شود، نه transaction توزیع‌شده طولانی. TIP: state، timeout و مسیرهای جبران را صریح مدل کنید." },
+      { q: "Backpressure در messaging چیست؟", a: "Backpressure زمانی است که producer سریع‌تر از ظرفیت consumer پیام می‌فرستد. محدودکردن prefetch، scale consumer و rate limit از انباشت کنترل‌نشده جلوگیری می‌کند. TIP: فقط با افزودن worker مشکل دیتابیس پایین‌دست را بدتر نکنید." },
+      { q: "امنیت پیام‌ها چگونه تأمین می‌شود؟", a: "ارتباط broker باید با TLS و اعتبارنامه کم‌اختیار محافظت شود. داده حساس می‌تواند در سطح payload رمز و دسترسی topic محدود شود. TIP: secret را داخل پیام یا log ثبت نکنید." }
+    ]
+  },
+  {
+    title: "Docker و Containers",
+    desc: "بسته‌بندی، اجرای قابل‌تکرار و استقرار ASP.NET Core در محیط کانتینری",
+    questions: [
+      { q: "چرا برای ASP.NET Core از Container استفاده می‌کنیم؟", a: "Container برنامه و وابستگی‌های runtime را به‌شکل قابل‌تکرار بسته‌بندی می‌کند. اختلاف محیط توسعه و production کمتر و scale-out ساده‌تر می‌شود. TIP: container را immutable و process را stateless طراحی کنید." },
+      { q: "Dockerfile مناسب .NET چه بخش‌هایی دارد؟", a: "مرحله build از image مربوط به SDK برای restore و publish استفاده می‌کند. مرحله نهایی فقط runtime سبک و artifactهای publishشده را دارد. TIP: نسخه image پایه را pin و مرتباً patch کنید." },
+      { q: "Image Layer چیست؟", a: "هر دستور Dockerfile یک لایه cacheشدنی روی image می‌سازد. تغییر یک لایه cache لایه‌های پس از آن را باطل می‌کند. TIP: فایل پروژه را پیش از source کپی کنید تا `dotnet restore` بهتر cache شود." },
+      { q: "Multi-stage Build چه مزیتی دارد؟", a: "Multi-stage ابزار build را از image نهایی حذف می‌کند. در نتیجه image کوچک‌تر و سطح حمله کمتر می‌شود. TIP: فقط خروجی `dotnet publish` را به مرحله runtime منتقل کنید." },
+      { q: "docker-compose چه کاربردی دارد؟", a: "Compose چند سرویس مانند API، دیتابیس و Redis را محلی تعریف و اجرا می‌کند. network، volume و environment در یک فایل هماهنگ می‌شوند. TIP: آن را ابزار راحتی توسعه بدانید و secret واقعی commit نکنید." },
+      { q: "تفاوت Image و Container چیست؟", a: "Image قالب immutable شامل filesystem و metadata اجرا است. Container نمونه درحال‌اجرای همان image با لایه writable موقت است. TIP: داده ماندگار را در volume یا سرویس خارجی نگه دارید." },
+      { q: "Pod، Service و Deployment در Kubernetes چیستند؟", a: "Pod کوچک‌ترین واحد اجرا و شامل یک یا چند container نزدیک است. Deployment تعداد replica و rollout را مدیریت و Service آدرس پایدار شبکه می‌دهد. TIP: برنامه را به IP یا نام Pod وابسته نکنید." },
+      { q: "Liveness، Readiness و Startup Probe چه تفاوتی دارند؟", a: "Liveness گیرکردن process را تشخیص و موجب restart می‌شود. Readiness ورود traffic را کنترل و startup برای شروع طولانی فرصت ایجاد می‌کند. TIP: وابستگی خارجی ناپایدار را در liveness قرار ندهید." },
+      { q: "Configuration در Container چگونه تزریق می‌شود؟", a: "تنظیمات با environment variable، فایل mountشده یا provider خارجی وارد می‌شوند. ASP.NET Core نام‌های تو‌در‌تو را با `__` مانند `Db__Host` می‌خواند. TIP: image یکسان را در همه محیط‌ها نگه دارید." },
+      { q: "Secret در Container چگونه مدیریت می‌شود؟", a: "Secret نباید در Dockerfile، image یا repository ذخیره شود. orchestrator یا secret manager آن را هنگام اجرا تزریق می‌کند. TIP: دسترسی کمینه، rotation و جلوگیری از logشدن secret ضروری است." },
+      { q: "چرا Container نباید با root اجرا شود؟", a: "اجرای root در صورت نفوذ دامنه آسیب را افزایش می‌دهد. user غیرممتاز و filesystem فقط‌خواندنی ریسک را کم می‌کند. TIP: مجوز port و مسیرهای writable را پیش از تغییر user بررسی کنید." },
+      { q: "چگونه حجم Docker Image را کاهش می‌دهید؟", a: "از runtime image مناسب، multi-stage build و `.dockerignore` استفاده می‌کنیم. artifact، cache و ابزار غیرضروری نباید وارد image نهایی شوند. TIP: کاهش اندازه را در برابر نیازهای globalization و diagnostics بسنجید." },
+      { q: "Volume چه کاربردی دارد؟", a: "Volume داده را مستقل از عمر container نگه می‌دارد. برای فایل موقت shared یا داده محلی لازم می‌شود، هرچند دیتابیس مدیریت‌شده معمولاً بهتر است. TIP: مالکیت، backup و permission volume را مشخص کنید." },
+      { q: "Graceful Shutdown در Container چگونه است؟", a: "orchestrator ابتدا `SIGTERM` می‌فرستد و مهلتی برای پایان کار می‌دهد. ASP.NET Core باید درخواست جدید نپذیرد و کار جاری را تا حد امن تمام کند. TIP: timeout خاموشی را با طول jobها هماهنگ کنید." },
+      { q: "چگونه Container را عیب‌یابی می‌کنید؟", a: "ابتدا log، exit code، health و مصرف CPU و memory را بررسی می‌کنیم. سپس configuration، network و eventهای orchestrator مسیر مشکل را روشن می‌کنند. TIP: image production را با نصب دستی ابزار تغییر ندهید؛ artifact تشخیصی بگیرید." }
+    ]
+  },
+  {
+    title: "LINQ و کار با داده",
+    desc: "اجرای query، ترجمه عبارت‌ها و جلوگیری از خطاهای رایج دسترسی داده",
+    questions: [
+      { q: "Deferred Execution در LINQ چیست؟", a: "بسیاری از queryهای LINQ هنگام تعریف اجرا نمی‌شوند. اجرا با enumeration یا عملیاتی مانند `ToList` آغاز می‌شود. TIP: تغییر منبع پیش از enumeration می‌تواند نتیجه را تغییر دهد." },
+      { q: "IQueryable و IEnumerable چه تفاوتی دارند؟", a: "`IQueryable` expression را برای provider مانند EF Core نگه می‌دارد تا به SQL ترجمه شود. `IEnumerable` ادامه پردازش را در حافظه و با کد .NET انجام می‌دهد. TIP: filter و projection را پیش از materialization اعمال کنید." },
+      { q: "Select و SelectMany چه تفاوتی دارند؟", a: "`Select` هر عنصر را به یک خروجی نگاشت می‌کند. `SelectMany` مجموعه‌های تو‌در‌تو را نگاشت و در یک sequence تخت می‌کند. TIP: برای فرزندان همه والدها معمولاً `SelectMany` مناسب است." },
+      { q: "Join در LINQ چگونه کار می‌کند؟", a: "`Join` دو مجموعه را بر اساس key برابر ترکیب و نتیجه تخت می‌سازد. در `IQueryable` معمولاً به `INNER JOIN` ترجمه می‌شود. TIP: برای left join از `GroupJoin` همراه `DefaultIfEmpty` استفاده کنید." },
+      { q: "چه pitfallsی در GroupBy وجود دارد؟", a: "`GroupBy` روی داده بزرگ می‌تواند حافظه زیادی مصرف کند. همه شکل‌های grouping پیچیده نیز توسط provider دیتابیس ترجمه نمی‌شوند. TIP: SQL تولیدشده و محل انجام aggregation را بررسی کنید." },
+      { q: "Expression Tree چیست؟", a: "Expression Tree کد lambda را به ساختار داده قابل بازرسی تبدیل می‌کند. providerهایی مثل EF Core آن را تحلیل و به زبان مقصد ترجمه می‌کنند. TIP: هر متد .NET قابل تبدیل به SQL نیست." },
+      { q: "چه زمانی AsEnumerable استفاده می‌کنیم؟", a: "`AsEnumerable` ادامه query را از provider به LINQ-to-Objects منتقل می‌کند. وقتی بخش کوچکی قابل ترجمه نیست و داده قبلاً محدود شده مفید است. TIP: استفاده زودهنگام ممکن است کل جدول را به حافظه بیاورد." },
+      { q: "ToList زودهنگام چه مشکلی ایجاد می‌کند؟", a: "`ToList` query را فوراً اجرا و تمام نتایج را materialize می‌کند. پس از آن filterها در حافظه اجرا و امکان ترکیب SQL از بین می‌رود. TIP: materialization را تا انتهای query به تأخیر بیندازید." },
+      { q: "Any و Count برای بررسی وجود داده چه تفاوتی دارند؟", a: "`Any` با یافتن اولین مورد می‌تواند متوقف شود. `Count` برای شمارش کامل طراحی شده و ممکن است کار بیشتری انجام دهد. TIP: برای سؤال وجود داشتن از `Any` استفاده کنید." },
+      { q: "First، Single و نسخه‌های OrDefault چه تفاوتی دارند؟", a: "`First` اولین مورد را می‌گیرد و تعدد را مجاز می‌داند. `Single` دقیقاً یک مورد می‌خواهد و در صورت تعدد خطا می‌دهد. TIP: پسوند `OrDefault` فقط نبود نتیجه را تحمل می‌کند، نه تعدد در `SingleOrDefault`." },
+      { q: "AsNoTracking چه زمانی مناسب است؟", a: "`AsNoTracking` نگهداری state تغییرات entity را غیرفعال می‌کند. برای query فقط‌خواندنی حافظه و CPU کمتری مصرف می‌شود. TIP: وقتی قرار است entity ذخیره شود tracking را آگاهانه حفظ کنید." },
+      { q: "چگونه Dynamic Query امن می‌سازید؟", a: "شرط‌ها را با expressionهای پارامتری و whitelist فیلدهای مجاز ترکیب می‌کنیم. ساخت SQL با الحاق ورودی کاربر خطر injection دارد. TIP: query نهایی، محدودیت صفحه و translation آن را تست کنید." }
+    ]
+  },
+  {
+    title: "SignalR و Real-time",
+    desc: "ارتباط بلادرنگ، مقیاس‌پذیری و امنیت اتصال‌های طولانی",
+    questions: [
+      { q: "SignalR چیست؟", a: "SignalR چارچوب ASP.NET Core برای ارتباط بلادرنگ server و client است. transport مناسب را مذاکره و مدیریت connection و group را ساده می‌کند. TIP: برای notification تعاملی مناسب است، نه جایگزین broker پایدار." },
+      { q: "Hub در SignalR چیست؟", a: "Hub API سطح بالا برای فراخوانی متد میان client و server است. اتصال‌ها transient هستند و instance هاب برای نگهداری state مناسب نیست. TIP: state را در سرویس خارجی یا دیتابیس نگه دارید." },
+      { q: "WebSockets و SSE چه تفاوتی دارند؟", a: "WebSocket ارتباط دوطرفه full-duplex روی یک اتصال فراهم می‌کند. SSE یک‌طرفه از server به client و مبتنی بر HTTP است. TIP: نیاز ارتباط برگشتی، proxyها و محدودیت client را در انتخاب لحاظ کنید." },
+      { q: "SignalR چگونه transport را انتخاب می‌کند؟", a: "client معمولاً negotiation انجام می‌دهد و بهترین transport قابل‌دسترسی را برمی‌گزیند. WebSockets ترجیح دارد و fallbackها در محیط محدود استفاده می‌شوند. TIP: پشتیبانی WebSocket را در proxy و load balancer بررسی کنید." },
+      { q: "احراز هویت در SignalR چگونه انجام می‌شود؟", a: "اتصال SignalR می‌تواند از cookie یا bearer token استفاده کند. `[Authorize]` روی Hub یا method دسترسی را محدود می‌کند. TIP: مجوز عضویت group را در server بررسی کنید و به نام group اعتماد نکنید." },
+      { q: "SignalR را چگونه scale-out می‌کنید؟", a: "در چند instance، پیام و اطلاعات اتصال باید میان nodeها هماهنگ شود. Redis backplane یا Azure SignalR Service این انتشار را انجام می‌دهد. TIP: sticky session به‌تنهایی broadcast بین nodeها را حل نمی‌کند." },
+      { q: "Group در SignalR چیست؟", a: "Group راهی برای ارسال پیام به مجموعه منطقی connectionها است. عضویت معمولاً با قطع اتصال پایدار نمی‌ماند و باید دوباره برقرار شود. TIP: group سازوکار authorization نیست و کنترل دسترسی جدا لازم دارد." },
+      { q: "Reconnect و از دست رفتن پیام چگونه مدیریت می‌شود؟", a: "client باید automatic reconnect و تغییر connection ID را مدیریت کند. SignalR به‌تنهایی تضمین صف پایدار و replay همه پیام‌ها را نمی‌دهد. TIP: برای پیام حیاتی sequence number، ذخیره پایدار و endpoint جبران در نظر بگیرید." }
+    ]
+  }
+];

@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>بانک سوالات مصاحبه | ASP.NET Core Backend Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f1419;
+      --bg-elevated: #1a222d;
+      --bg-card: #1e2836;
+      --bg-hover: #243044;
+      --border: #2d3a4d;
+      --text: #e8eef6;
+      --text-muted: #9aa8bc;
+      --accent: #3d9cf0;
+      --accent-soft: rgba(61, 156, 240, 0.12);
+      --accent-strong: #2b7fd4;
+      --success: #3ecf8e;
+      --warning: #f0b429;
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+      --radius: 14px;
+      --radius-sm: 10px;
+      --font: "Vazirmatn", system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background:
+        radial-gradient(ellipse 80% 50% at 10% -10%, rgba(61, 156, 240, 0.18), transparent 50%),
+        radial-gradient(ellipse 60% 40% at 90% 0%, rgba(62, 207, 142, 0.08), transparent 45%),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.75;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      width: min(1100px, calc(100% - 2rem));
+      margin-inline: auto;
+    }
+
+    /* Header */
+    header.app-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(15, 20, 25, 0.85);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 0;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .brand h1 {
+      font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .brand p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .search-wrap {
+      position: relative;
+      min-width: min(280px, 100%);
+    }
+
+    .search-wrap input {
+      width: 100%;
+      padding: 0.65rem 2.5rem 0.65rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .search-wrap input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    .search-wrap .icon {
+      position: absolute;
+      left: 0.9rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+      font-size: 0.85rem;
+    }
+
+    .btn {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.55rem 0.9rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, transform 0.1s;
+      white-space: nowrap;
+    }
+
+    .btn:hover { background: var(--bg-hover); border-color: #3d4f66; }
+    .btn:active { transform: scale(0.98); }
+    .btn.primary {
+      background: var(--accent-strong);
+      border-color: transparent;
+      color: #fff;
+    }
+    .btn.primary:hover { background: var(--accent); }
+
+    /* Hero */
+    .hero {
+      padding: 2.5rem 0 1.5rem;
+    }
+
+    .hero-card {
+      background: linear-gradient(145deg, var(--bg-elevated), var(--bg-card));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card h2 {
+      font-size: clamp(1.4rem, 3vw, 1.85rem);
+      font-weight: 800;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-card .lead {
+      color: var(--text-muted);
+      max-width: 62ch;
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+    }
+
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .stat {
+      background: var(--accent-soft);
+      border: 1px solid rgba(61, 156, 240, 0.25);
+      border-radius: var(--radius-sm);
+      padding: 0.65rem 1rem;
+      min-width: 120px;
+    }
+
+    .stat .num {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--accent);
+      display: block;
+      line-height: 1.2;
+    }
+
+    .stat .label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Layout */
+    .layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 1.5rem;
+      padding-bottom: 4rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 78px;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+      padding: 0.25rem;
+      scrollbar-width: thin;
+    }
+
+    .nav-title {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+      font-weight: 700;
+    }
+
+    .cat-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .cat-nav a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding: 0.55rem 0.7rem;
+      border-radius: 8px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .cat-nav a:hover,
+    .cat-nav a.active {
+      background: var(--accent-soft);
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .cat-nav .count {
+      font-size: 0.72rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 0.1rem 0.45rem;
+      border-radius: 999px;
+      color: var(--text-muted);
+    }
+
+    /* Sections */
+    .category-section {
+      margin-bottom: 2.25rem;
+      scroll-margin-top: 90px;
+    }
+
+    .category-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .category-header h3 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .category-header .badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+    }
+
+    .category-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      width: 100%;
+      margin-top: -0.35rem;
+    }
+
+    /* Accordion */
+    .qa-list { display: flex; flex-direction: column; gap: 0.55rem; }
+
+    .qa-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .qa-item:hover { border-color: #3d5068; }
+    .qa-item.open {
+      border-color: rgba(61, 156, 240, 0.45);
+      box-shadow: 0 0 0 1px rgba(61, 156, 240, 0.15);
+    }
+
+    .qa-question {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      text-align: right;
+      padding: 0.95rem 1rem;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      line-height: 1.55;
+    }
+
+    .qa-question:hover { background: var(--bg-hover); }
+
+    .q-num {
+      flex-shrink: 0;
+      width: 1.85rem;
+      height: 1.85rem;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-top: 0.1rem;
+    }
+
+    .q-text { flex: 1; }
+
+    .chevron {
+      flex-shrink: 0;
+      width: 1.4rem;
+      height: 1.4rem;
+      margin-top: 0.2rem;
+      color: var(--text-muted);
+      transition: transform 0.25s ease;
+    }
+
+    .qa-item.open .chevron { transform: rotate(180deg); color: var(--accent); }
+
+    .qa-answer {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.28s ease;
+    }
+
+    .qa-item.open .qa-answer { grid-template-rows: 1fr; }
+
+    .qa-answer-inner {
+      overflow: hidden;
+      min-height: 0;
+    }
+
+    .qa-answer-body {
+      padding: 0 1rem 1.1rem 1rem;
+      margin-inline-start: 2.6rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 400;
+      border-top: 1px dashed var(--border);
+      padding-top: 0.85rem;
+    }
+
+    .qa-answer-body strong { color: var(--text); font-weight: 700; }
+    .qa-answer-body code {
+      font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+      font-size: 0.82em;
+      background: rgba(0, 0, 0, 0.35);
+      padding: 0.1em 0.35em;
+      border-radius: 4px;
+      color: #9fd0ff;
+      direction: ltr;
+      unicode-bidi: embed;
+    }
+
+    .qa-answer-body ul {
+      margin: 0.4rem 0 0.2rem 0;
+      padding-inline-start: 1.2rem;
+    }
+
+    .qa-answer-body li { margin-bottom: 0.25rem; }
+
+    .tip {
+      margin-top: 0.65rem;
+      padding: 0.55rem 0.75rem;
+      border-radius: 8px;
+      background: rgba(62, 207, 142, 0.08);
+      border: 1px solid rgba(62, 207, 142, 0.22);
+      color: #b8e6cf;
+      font-size: 0.84rem;
+    }
+
+    .tip::before {
+      content: "نکته مصاحبه: ";
+      font-weight: 700;
+      color: var(--success);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--text-muted);
+      display: none;
+    }
+
+    .empty-state.visible { display: block; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 0 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    .highlight-match { background: rgba(240, 180, 41, 0.25); border-radius: 2px; }
+
+    @media (max-width: 600px) {
+      .qa-answer-body { margin-inline-start: 0; }
+      .header-actions { width: 100%; }
+      .search-wrap { min-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <h1>بانک سوالات مصاحبه Backend</h1>
+        <p>ASP.NET Core · C# · EF Core · SQL · Architecture</p>
+      </div>
+      <div class="header-actions">
+        <div class="search-wrap">
+          <input type="search" id="searchInput" placeholder="جستجو در سوالات و پاسخ‌ها..." autocomplete="off" />
+          <span class="icon">⌕</span>
+        </div>
+        <button type="button" class="btn" id="expandAll">باز کردن همه</button>
+        <button type="button" class="btn" id="collapseAll">بستن همه</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-card">
+        <h2>آمادگی کامل برای مصاحبه ASP.NET Core Backend Developer</h2>
+        <p class="lead">
+          پاسخ‌ها به سبک جلسه مصاحبه نوشته شده‌اند: شفاف، کاربردی و با اشاره به trade-offها.
+          روی هر سوال کلیک کنید تا پاسخ باز شود. از جستجو و فهرست سمت راست برای حرکت سریع بین موضوعات استفاده کنید.
+        </p>
+        <div class="stats">
+          <div class="stat"><span class="num" id="statQuestions">—</span><span class="label">سوال</span></div>
+          <div class="stat"><span class="num" id="statCategories">—</span><span class="label">دسته‌بندی</span></div>
+          <div class="stat"><span class="num">مصاحبه</span><span class="label">سبک پاسخ</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="nav-title">فهرست موضوعات</div>
+        <nav class="cat-nav" id="catNav"></nav>
+      </aside>
+      <div>
+        <div class="empty-state" id="emptyState">نتیجه‌ای برای جستجوی شما پیدا نشد.</div>
+        <div id="content"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      ویژه دانشجویان · ASP.NET Core Backend Developer Interview Bank · برای استفاده آموزشی
+    </div>
+  </footer>
+
+  <script src="questions-data.js"></script>
+  <script>
+    (function () {
+      const content = document.getElementById("content");
+      const catNav = document.getElementById("catNav");
+      const searchInput = document.getElementById("searchInput");
+      const emptyState = document.getElementById("emptyState");
+      const data = window.INTERVIEW_BANK || [];
+
+      let globalIndex = 0;
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function formatAnswer(answer) {
+        let html = escapeHtml(answer);
+        html = html.replace(/`([^`]+)`/g, "<code>$1</code>");
+        html = html.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+        html = html.replace(/(?:^|\s)TIP:\s*/g, "\nTIP:");
+        html = html.replace(/^TIP:\s*(.+)$/gm, '<div class="tip">$1</div>');
+        html = html.replace(/(?:^|\n)\s*-\s+(.+)/g, (m, item) => "\n<li>" + item + "</li>");
+        if (html.includes("<li>")) {
+          html = html.replace(/(?:<li>[\s\S]*?<\/li>\s*)+/g, (block) => "<ul>" + block + "</ul>");
+        }
+        html = html.replace(/\n\n/g, "</p><p>");
+        html = "<p>" + html + "</p>";
+        html = html.replace(/<p>\s*<ul>/g, "<ul>").replace(/<\/ul>\s*<\/p>/g, "</ul>");
+        html = html.replace(/<p>\s*<div/g, "<div").replace(/<\/div>\s*<\/p>/g, "</div>");
+        html = html.replace(/<p>\s*<\/p>/g, "");
+        return html;
+      }
+
+      function render(filter = "") {
+        const q = filter.trim().toLowerCase();
+        content.innerHTML = "";
+        catNav.innerHTML = "";
+        globalIndex = 0;
+        let totalVisible = 0;
+        let catCount = 0;
+
+        data.forEach((cat, catIdx) => {
+          const items = cat.questions.filter((item) => {
+            if (!q) return true;
+            const hay = (item.q + " " + item.a + " " + cat.title).toLowerCase();
+            return hay.includes(q);
+          });
+
+          if (!items.length) return;
+          catCount++;
+          totalVisible += items.length;
+
+          const id = "cat-" + catIdx;
+          const navLink = document.createElement("a");
+          navLink.href = "#" + id;
+          navLink.innerHTML = "<span>" + escapeHtml(cat.title) + '</span><span class="count">' + items.length + "</span>";
+          catNav.appendChild(navLink);
+
+          const section = document.createElement("section");
+          section.className = "category-section";
+          section.id = id;
+
+          const header = document.createElement("div");
+          header.className = "category-header";
+          header.innerHTML =
+            "<h3>" + escapeHtml(cat.title) + ' <span class="badge">' + items.length + " سوال</span></h3>" +
+            (cat.desc ? '<p class="category-desc">' + escapeHtml(cat.desc) + "</p>" : "");
+          section.appendChild(header);
+
+          const list = document.createElement("div");
+          list.className = "qa-list";
+
+          items.forEach((item) => {
+            globalIndex++;
+            const num = globalIndex;
+            const el = document.createElement("article");
+            el.className = "qa-item";
+            el.dataset.q = item.q.toLowerCase();
+
+            const btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "qa-question";
+            btn.setAttribute("aria-expanded", "false");
+            btn.innerHTML =
+              '<span class="q-num">' + num + "</span>" +
+              '<span class="q-text">' + escapeHtml(item.q) + "</span>" +
+              '<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>';
+
+            const ans = document.createElement("div");
+            ans.className = "qa-answer";
+            ans.innerHTML = '<div class="qa-answer-inner"><div class="qa-answer-body">' + formatAnswer(item.a) + "</div></div>";
+
+            btn.addEventListener("click", () => {
+              const open = el.classList.toggle("open");
+              btn.setAttribute("aria-expanded", open ? "true" : "false");
+            });
+
+            el.appendChild(btn);
+            el.appendChild(ans);
+            list.appendChild(el);
+          });
+
+          section.appendChild(list);
+          content.appendChild(section);
+        });
+
+        document.getElementById("statQuestions").textContent = String(
+          data.reduce((s, c) => s + c.questions.length, 0)
+        );
+        document.getElementById("statCategories").textContent = String(data.length);
+        emptyState.classList.toggle("visible", totalVisible === 0);
+
+        // active nav on scroll
+        const links = [...catNav.querySelectorAll("a")];
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              links.forEach((l) => l.classList.remove("active"));
+              const active = links.find((l) => l.getAttribute("href") === "#" + entry.target.id);
+              if (active) active.classList.add("active");
+            });
+          },
+          { rootMargin: "-20% 0px -70% 0px", threshold: 0 }
+        );
+        content.querySelectorAll(".category-section").forEach((s) => observer.observe(s));
+      }
+
+      document.getElementById("expandAll").addEventListener("click", () => {
+        document.querySelectorAll(".qa-item").forEach((el) => {
+          el.classList.add("open");
+          const btn = el.querySelector(".qa-question");
+          if (btn) btn.setAttribute("aria-expanded", "true");
+        });
+      });
+
+      document.getElementById("collapseAll").addEventListener("click", () => {
+        document.querySelectorAll(".qa-item").forEach((el) => {
+          el.classList.remove("open");
+          const btn = el.querySelector(".qa-question");
+          if (btn) btn.setAttribute("aria-expanded", "false");
+        });
+      });
+
+      let timer;
+      searchInput.addEventListener("input", () => {
+        clearTimeout(timer);
+        timer = setTimeout(() => render(searchInput.value), 180);
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>
