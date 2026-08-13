@@ -1,13 +1,13 @@
-# بانک سوالات مصاحبه ASP.NET Core Backend Developer
+# AspNetCoreInterViewQuestoins
 
-صفحهٔ تعاملی برای آمادگی مصاحبهٔ موقعیت **ASP.NET Core Backend Developer**.
+بانک سوالات مصاحبه **ASP.NET Core Backend Developer** — صفحهٔ تعاملی با پاسخ‌های مصاحبه‌محور.
 
 ## اجرا
 
 فایل `index.html` را در مرورگر باز کنید (در کنار `questions-data.js` باشد).
 
 ```text
-InterviewQuestions/
+AspNetCoreInterViewQuestoins/
 ├── index.html          # رابط کاربری (جستجو، اکاردئون، فهرست موضوعات)
 ├── questions-data.js   # بانک سوالات و پاسخ‌ها
 └── part1.js … part4.js # منبع ویرایش دسته‌بندی‌ها (اختیاری)
