@@ -9,28 +9,33 @@
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #f5f6f8;
-      --surface: #ffffff;
-      --text: #1f2933;
-      --muted: #6b7785;
-      --line: #e4e7ec;
-      --accent: #1f6f8b;
-      --accent-soft: #e8f3f6;
-      --tip-bg: #f3faf6;
-      --tip-line: #3d9a6a;
-      --code-bg: #eef1f5;
-      --code-text: #1a4d6d;
+      --bg: #0f1419;
+      --surface: #1e2836;
+      --surface-hover: #243044;
+      --text: #e8eef6;
+      --muted: #9aa8bc;
+      --line: #2d3a4d;
+      --accent: #3d9cf0;
+      --accent-soft: rgba(61, 156, 240, 0.12);
+      --success: #3ecf8e;
+      --tip-bg: rgba(62, 207, 142, 0.08);
+      --tip-line: rgba(62, 207, 142, 0.45);
+      --code-bg: rgba(0, 0, 0, 0.35);
+      --code-text: #9fd0ff;
       --font: "Vazirmatn", system-ui, sans-serif;
       --measure: 46rem;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; color-scheme: dark; }
 
     body {
       font-family: var(--font);
-      background: var(--bg);
+      background:
+        radial-gradient(ellipse 80% 50% at 10% -10%, rgba(61, 156, 240, 0.18), transparent 50%),
+        radial-gradient(ellipse 60% 40% at 90% 0%, rgba(62, 207, 142, 0.08), transparent 45%),
+        var(--bg);
       color: var(--text);
       line-height: 1.8;
       min-height: 100vh;
@@ -46,8 +51,8 @@
       position: sticky;
       top: 0;
       z-index: 20;
-      background: rgba(245, 246, 248, 0.92);
-      backdrop-filter: blur(10px);
+      background: rgba(15, 20, 25, 0.88);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--line);
     }
 
@@ -202,9 +207,9 @@
       line-height: 1.6;
     }
 
-    .qa-question:hover { background: #fafbfc; }
+    .qa-question:hover { background: var(--surface-hover); }
 
-    .qa-item.open .qa-question { background: #f7fafb; }
+    .qa-item.open .qa-question { background: rgba(61, 156, 240, 0.06); }
 
     .q-num {
       flex-shrink: 0;
@@ -223,7 +228,7 @@
       width: 1.15rem;
       height: 1.15rem;
       margin-top: 0.25rem;
-      color: #9aa5b1;
+      color: var(--muted);
       transition: transform 0.2s ease;
     }
 
@@ -247,7 +252,7 @@
 
     .qa-answer-body {
       padding: 0 1rem 1.1rem 2.4rem;
-      color: #3e4c59;
+      color: var(--muted);
       font-size: 0.92rem;
       font-weight: 400;
     }
@@ -282,7 +287,7 @@
       padding: 0.55rem 0.75rem;
       border-inline-start: 3px solid var(--tip-line);
       background: var(--tip-bg);
-      color: #2f5d45;
+      color: #b8e6cf;
       font-size: 0.86rem;
       border-radius: 0 6px 6px 0;
     }
@@ -290,6 +295,7 @@
     .tip::before {
       content: "نکته: ";
       font-weight: 700;
+      color: var(--success);
     }
 
     .empty-state {
